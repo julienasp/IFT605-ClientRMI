@@ -1,4 +1,4 @@
-import java.net.InetAddress;
+
 import java.rmi.Naming;
 import java.rmi.Remote;
 
@@ -17,9 +17,9 @@ public class ClientRMI {
 		if (System.getSecurityManager() == null) {			
 			System.setSecurityManager(new SecurityManager());			
 		}
-		try {			
-			//Remote r = (IRemoteEquation) Naming.lookup("rmi://" + InetAddress.getLocalHost().getHostAddress() + "/ServeurRMI");	
-			Remote r = (IRemoteEquation) Naming.lookup("rmi://localhost:1099/ServeurRMI");
+		try {		
+				
+			Remote r = Naming.lookup("rmi://localhost:1099/ServeurRMI");
 			System.out.println(r);			
 			if (r instanceof IRemoteEquation) {				
 				BasicEquation be = new BasicEquation(1,2);
