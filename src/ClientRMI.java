@@ -1,7 +1,8 @@
 import java.rmi.Naming;
-import core.BasicEquation;
-import core.MultiplicativeEquation;
-import core.SummativeEquation;
+import java.rmi.RemoteException;
+import java.util.LinkedList;
+
+import core.Equation;
 
 
 public class ClientRMI {
@@ -18,24 +19,18 @@ public class ClientRMI {
 				
 			IRemoteEquation svr = (IRemoteEquation)Naming.lookup("rmi://localhost:1099/ServeurRMI");
 			System.out.println(svr);			
-			if (svr instanceof IRemoteEquation) {				
-				BasicEquation be = new BasicEquation(2,2);
-				SummativeEquation se = new SummativeEquation(be,be);
-				SummativeEquation se2 = new SummativeEquation(se,se);
+			if (svr instanceof IRemoteEquation) {
+				LinkedList<Equation> list = new EquationsProvider<Equation>().getList();
 				
-				MultiplicativeEquation me = new MultiplicativeEquation(be,se);
-				
-				be.printUserReadable();
-				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(be, 1)));
-				
-				se.printUserReadable();
-				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(se, 1)));
-				
-				se2.printUserReadable();
-				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(se2, 1)));
-				
-				me.printUserReadable();
-				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(me, 1)));
+				list.stream().forEach(e -> {
+					e.printUserReadable();
+					try {
+						System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(e, 1)));
+					} catch (RemoteException e1) {
+						System.out.println("Remote communication error");
+						e1.printStackTrace();
+					}
+				});
 			}				
 		} catch (Exception e) {		
 			System.out.println(e.getMessage());
