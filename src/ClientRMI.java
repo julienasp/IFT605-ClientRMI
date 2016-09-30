@@ -1,4 +1,8 @@
 import java.rmi.Naming;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+import core.AdminToken;
 import core.BasicEquation;
 import core.MultiplicativeEquation;
 import core.SummativeEquation;
@@ -16,7 +20,9 @@ public class ClientRMI {
 		}
 		try {		
 				
-			IRemoteEquation svr = (IRemoteEquation)Naming.lookup("rmi://localhost:1099/ServeurRMI");
+			Registry registry = LocateRegistry.getRegistry("localhost");
+			IRemoteEquation svr = (IRemoteEquation) registry.lookup("ServeurRMI");
+			IRemoteAdminHandler svr2 = (IRemoteAdminHandler) registry.lookup("ServeurRMI");
 			System.out.println(svr);			
 			if (svr instanceof IRemoteEquation) {				
 				BasicEquation be = new BasicEquation(2,2);
@@ -36,6 +42,8 @@ public class ClientRMI {
 				
 				me.printUserReadable();
 				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(me, 1)));
+				
+				svr2.interruptThread(new AdminToken("rtCCTYgssdw?"), "dfdfd");
 			}				
 		} catch (Exception e) {		
 			System.out.println(e.getMessage());
