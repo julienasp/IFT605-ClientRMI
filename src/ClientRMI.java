@@ -43,7 +43,7 @@ public class ClientRMI {
 				me.printUserReadable();
 				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(me, 1)));
 				
-				svr2.interruptThread(new AdminToken("rtCCTYgssdw?"), "dfdfd");
+				svr2.interruptThread(new AdminToken("rtCCTYgssdw?"), 0);
 			}				
 		} catch (Exception e) {		
 			System.out.println(e.getMessage());
