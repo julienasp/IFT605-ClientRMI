@@ -51,3 +51,8 @@ bin/core/AbstractEquation.class
 *.class
 bin/core/AbstractEquation.class
 *.class
+*.class
+bin/ClientRMI.class
+*.class
+bin/IRemoteAdminHandler.class
+*.class

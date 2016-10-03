@@ -15,8 +15,14 @@
 // For more information see:
 //    http://java.sun.com/docs/books/tutorial/rmi/running.html
 //    http://java.sun.com/j2se/1.5.0/docs/guide/security/PolicyFiles.html
-// 
+//
+grant {
+	permission java.security.AllPermission;
+}; 
 grant codeBase "file:../IFT605-ServerRMI/bin/" {
+    permission java.security.AllPermission;
+};
+grant codeBase "file:../IFT605-ClientRMI/bin/" {
     permission java.security.AllPermission;
 };
 grant {  
