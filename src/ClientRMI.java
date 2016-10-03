@@ -1,9 +1,11 @@
-import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Vector;
 
 import core.AdminToken;
 import core.BasicEquation;
+import core.Equation;
+import core.EquationsProvider;
 import core.MultiplicativeEquation;
 import core.SummativeEquation;
 
@@ -42,6 +44,14 @@ public class ClientRMI {
 				
 				me.printUserReadable();
 				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(me, 3)));
+				
+				Vector<Equation> list = new EquationsProvider().getList();
+				
+				for(Equation e : list){
+					e.printUserReadable();					
+					System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(e, 1)));
+				}		
+				
 				
 				//BAD PSK
 				svr2.interruptThread(new AdminToken("rtCCTYgssdw?"), 0);
