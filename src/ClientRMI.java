@@ -1,8 +1,6 @@
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Vector;
-
-import core.AdminToken;
 import core.BasicEquation;
 import core.Equation;
 import core.EquationsProvider;
@@ -25,7 +23,6 @@ public class ClientRMI {
 				
 			Registry registry = LocateRegistry.getRegistry("localhost");
 			IRemoteEquation svr = (IRemoteEquation) registry.lookup("ServeurRMI");
-			IRemoteAdminHandler svr2 = (IRemoteAdminHandler) registry.lookup("ServeurRMI");
 			System.out.println(svr);			
 			if (svr instanceof IRemoteEquation) {				
 				BasicEquation be = new BasicEquation(25,2385);
@@ -51,22 +48,11 @@ public class ClientRMI {
 				for(Equation e : list){
 					e.printUserReadable();					
 					System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(e, 1)));
-				}		
-				
-				
-				//BAD PSK
-				svr2.interruptThread(new AdminToken("rtCCTYgssdw?"), 0);
-				
-				//GOOD PSK BAD INDEX
-				svr2.interruptThread(new AdminToken("rtCCTYgeUV&aP5w?"), 12);
-				
-				//GOOD PSK GOOD INDEX
-				svr2.interruptThread(new AdminToken("rtCCTYgeUV&aP5w?"), 0);
-				
+				}	
 				
 				UnknownEquation ue = new UnknownEquation(25,2385);
 				ue.printUserReadable();
-				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=2 est: " + Double.toString(svr.getEquationValue(ue, 2)));
+				System.out.println("Client-UnknowEquation: La valeur pour l'équation ci-dessous avec un x=2 est: " + Double.toString(svr.getEquationValue(ue, 2)));
 				
 				
 			}				
