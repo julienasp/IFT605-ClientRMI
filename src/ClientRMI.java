@@ -32,27 +32,27 @@ public class ClientRMI {
 				MultiplicativeEquation me = new MultiplicativeEquation(be,se);
 				
 				be.printUserReadable();
-				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=2 est: " + Double.toString(svr.getEquationValue(be, 2)));
+				System.out.println("Client: La valeur pour l'équation ci-dessus avec un x=2 est: " + Double.toString(svr.getEquationValue(be, 2)));
 				
 				se.printUserReadable();
-				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=5 est: " + Double.toString(svr.getEquationValue(se, 5)));
+				System.out.println("Client: La valeur pour l'équation ci-dessus avec un x=5 est: " + Double.toString(svr.getEquationValue(se, 5)));
 				
 				se2.printUserReadable();
-				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=6 est: " + Double.toString(svr.getEquationValue(se2, 6)));
+				System.out.println("Client: La valeur pour l'équation ci-dessus avec un x=6 est: " + Double.toString(svr.getEquationValue(se2, 6)));
 				
 				me.printUserReadable();
-				System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=3 est: " + Double.toString(svr.getEquationValue(me, 3)));
+				System.out.println("Client: La valeur pour l'équation ci-dessus avec un x=3 est: " + Double.toString(svr.getEquationValue(me, 3)));
 				
 				Vector<Equation> list = new EquationsProvider().getList();
 				
 				for(Equation e : list){
 					e.printUserReadable();					
-					System.out.println("Client: La valeur pour l'équation ci-dessous avec un x=1 est: " + Double.toString(svr.getEquationValue(e, 1)));
+					System.out.println("Client: La valeur pour l'équation ci-dessus avec un x=1 est: " + Double.toString(svr.getEquationValue(e, 1)));
 				}	
 				
 				UnknownEquation ue = new UnknownEquation(25,2385);
 				ue.printUserReadable();
-				System.out.println("Client-UnknowEquation: La valeur pour l'équation ci-dessous avec un x=2 est: " + Double.toString(svr.getEquationValue(ue, 2)));
+				System.out.println("Client-UnknowEquation: La valeur pour l'équation ci-dessus avec un x=2 est: " + Double.toString(svr.getEquationValue(ue, 2)));
 				
 				
 			}				
